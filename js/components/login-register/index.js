@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Dimensions, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import Triangle from 'react-native-triangle';
-import { Actions } from 'react-native-router-flux';
+
 
 const width = Dimensions.get('window').width;
 const borderRadius = 7;
@@ -40,10 +40,10 @@ export class Login extends Component {
                         <View style={styles.inputContainer}>
 
                             <View style={styles.usernameContainer}>
-                                <Text style={styles.input}>abc</Text>
+                                <Text style={styles.input}>Nathan.Gill</Text>
                             </View>
                             <View style={styles.domainContainer}>
-                                <Text style={styles.domain}>@abc.com</Text>
+                                <Text style={styles.domain}>@unilever.com</Text>
                             </View>
 
                         </View>

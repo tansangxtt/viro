@@ -1,5 +1,5 @@
 {
-  "name": "Viro",
+  "name": "PeeBee",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "babel-jest": "23.6.0",
     "babel-preset-react-native": "4.0.0",
     "jest": "23.6.0",
+    "metro-config": "^0.51.1",
     "react-test-renderer": "16.6.1"
   },
   "jest": {

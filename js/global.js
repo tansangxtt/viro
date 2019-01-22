@@ -8,7 +8,7 @@ global.bodyColor.body = '#5c6bc0';
 global.bodyColor.shoes = '#000000';
 
 global.accessories = {}
-global.accessories.purchased = [0];
+global.accessories.purchased = [];
 global.accessories.inShop = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 global.accessories.equipped = [0];
 

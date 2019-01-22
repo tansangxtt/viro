@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, PanResponder, View } from 'react-native';
 import { Viro3DSceneNavigator } from 'react-viro';
 
-var Avatar3DScene = require('./Avatar3DScene');
+var Avatar3DScene2 = require('./Avatar3DScene2');
 
-export class Avatar extends Component {
+export class Avatar2 extends Component {
 
     constructor(props) {
         super(props);
@@ -24,41 +24,21 @@ export class Avatar extends Component {
 
 
         };
-        //this.state.rotationY = 0;
-        //this.state.panResponder = PanResponder.create({
-        //    onStartShouldSetPanResponder: () => true,
-        //    onPanResponderMove: (evt, gestureState) => {
-        //        if (this.props.fixedRotation !== null) {
-        //            this.setState({
-        //                rotationY: this.state.rotationY + gestureState.vx * 30
-        //            });
-        //        }
-
-        //    },
-        //});
     }
 
     render() {
         let props = this.props;
         props.rotationY = this.state.rotationY;
-        /*
-         *             <Viro3DSceneNavigator style={styles.viro} apiKey="2AE4B758-D40B-4EE5-858A-54C8CE1CED20" viroAppProps={props} initialScene={{ scene: Avatar3DScene }} />
+        return (
             <View style={styles.container} >
-
-                <View style={styles.overlay} {...this.state.panResponder.panHandlers} />
-            </View>
-         */
-        //console.warn("avatar");
-        return (           
-            <View style={styles.container} >
-                <Viro3DSceneNavigator style={styles.viro} apiKey="2AE4B758-D40B-4EE5-858A-54C8CE1CED20" viroAppProps={props} initialScene={{ scene: Avatar3DScene }} />
+                <Viro3DSceneNavigator style={styles.viro} apiKey="2AE4B758-D40B-4EE5-858A-54C8CE1CED20" viroAppProps={props} initialScene={{ scene: Avatar3DScene2 }} />
                 <View style={styles.overlay} {...this.state.panResponder.panHandlers} />
             </View>
         );
     }
 }
 
-export default Avatar;
+export default Avatar2;
 
 
 const styles = StyleSheet.create({

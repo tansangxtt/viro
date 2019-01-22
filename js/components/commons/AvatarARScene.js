@@ -20,7 +20,8 @@ export class AvatarARScene extends Component {
         this.state.scale = [DEFAULT_SCALE, DEFAULT_SCALE, DEFAULT_SCALE];
         this.state.bodyColor = global.bodyColor;
 
-        this.viroAppProps = this.props.sceneNavigator.viroAppProps;        
+        this.viroAppProps = this.props.sceneNavigator.viroAppProps;
+        //this.ARPlaneRef = React.createRef();
         this.ARPlaneRef = null;
     }
 

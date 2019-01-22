@@ -5,55 +5,75 @@ import models from "../../res/models"
 
 const scale = [0.01, 0.01, 0.01];
 
-export default class Character extends Component {
+export default class CharacterHome extends Component {
     constructor(props) {
         super(props);
         this.state = {};
         this.state.animation = { name: 'Take 001', run: false };
         this.state.visible = false;
         this.state.bodyColor = global.bodyColor;
+        this.state.refreshReq = this.props.refreshReq;
         this.count = 5 + global.accessories.purchased.length;
     }
 
     onLoadEnd = () => {
         this.count--;
+        console.log("LOG__counting " + this.count);        
         if (this.count == 0) {
             this.setState(() => (
                 {
                     animation: { name: 'Take 001', run: true, loop: true },
                     visible: true,
                 }
-            ))
+            ));
 
-            //this.intervalId = setInterval(() => {
-            //    console.warn("interval triggered; run = " + this.state.animation.run);
-            //    this.setState(() => (
-            //        {
-            //            animation: { name: 'Take 001', run: this.state.animation.run, loop: true},
-            //        }
-            //    ))
-            //    this.setState(() => (
-            //        {
-            //            animation: { name: 'Take 001', run: true },
-            //        }
-            //    ))
-            //}
-            //    , 8400);
+            this.intervalId = setInterval(() => {
+                console.log("LOG__" + "Animation Interval");
+                this.setState(() => (
+                    {
+                        animation: { name: 'Take 001', run: this.state.animation.run, loop: true },
+                    }
+                ));
+                this.setState(() => (
+                    {
+                        animation: { name: 'Take 001', run: true },
+                    }
+                ));
+            }
+                , 8400);
 
         }
     }
 
     componentDidMount() {
+        console.log("LOG__" + "CharacterHome did mount");
     }
 
 
     componentWillUnmount() {
-        //clearInterval(this.intervalId);
+        clearInterval(this.intervalId);
+        console.log("LOG__" + "CharacterHome will unmount");
     }
+
+    componentWillReceiveProps(nextProps) {
+
+        if (nextProps.refreshReq == this.props.refreshReq) {
+            console.log("LOG__" + "CharacterHome WillReceiveProps " + this.state.refreshReq);
+            this.setState(() => (
+                {
+                    refreshReq: !this.state.refreshReq,
+                    animation: { name: 'Take 001', run: this.state.animation.run, loop: true },
+                    visible: !this.state.visible,
+                }
+            ));
+        }
+
+    }  
 
     render() {
         let accessories = [];
-
+        console.log("LOG__" + "CharacterHome render");
+        console.log("LOG__CharacterHome render - counting " + this.count);        
         // TODO: THIS IS HACK, FIX THIS
         for (let i in global.accessories.purchased) {
             let id = global.accessories.purchased[i];
@@ -75,4 +95,4 @@ export default class Character extends Component {
     }
 }
 
-module.exports = Character;
+module.exports = CharacterHome;

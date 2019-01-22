@@ -2,48 +2,44 @@
 import React, { Component } from 'react';
 import { ViroCamera, ViroScene, ViroDirectionalLight, ViroImage, ViroAmbientLight, ViroNode, ViroSkyBox } from 'react-viro';
 
-var Character = require('./Character');
+var CharacterHome = require('./CharacterHome');
 
-export default class Avatar3DScene extends Component {
+export default class AvatarHome3DScene extends Component {
 
   constructor(props) {
     super(props);
       this.state = {
           bodyColor: global.bodyColor,
-          refreshReq: false,
+          refreshReq: !this.props.sceneNavigator.viroAppProps.refreshReq,
       };
-      this.refreshReq = this.props.sceneNavigator.viroAppProps.refreshReq;
     }
 
   componentDidMount() {
-    this.intervalId = setInterval(() => (
-      this.setState(() => (
-        {
-          bodyColor: global.bodyColor
-        }
-      ))
-    ), 1000);
+    //this.intervalId = setInterval(() => (
+    //  this.setState(() => (
+    //    {
+    //      bodyColor: global.bodyColor
+    //    }
+    //  ))
+    //), 1000);
 
-      //this.refeshInterval = setInterval(() => {
-      //    //this.props.sceneNavigator.replace({ scene: Avatar3DScene });
-      //    this.setState({ bodyColor: global.bodyColor });
-      //}, 10000);
+    //  this.refeshInterval = setInterval(() => {
+    //      this.props.sceneNavigator.replace({ scene: AvatarHome3DScene });
+    //      console.warn("Replace");
+    //      this.setState({ bodyColor: global.bodyColor });
+    //  }, 10000);
+
+      console.log("LOG__" + "AvatarHome3DScene did mount");
     }    
 
   componentWillUnmount() {
-      clearInterval(this.intervalId);
+      //clearInterval(this.intervalId);
       //clearInterval(this.refeshInterval);
+      console.log("LOG__" + "AvatarHome3DScene will unmount");
     }
 
-    refresh() {
-        this.setState({
-            refreshReq: true,
-        })
-    }
-
-    render() {
-
-        //console.warn("avatar3dscene");
+    render() {        
+        console.log("LOG__" + "AvatarHome3DScene Render " + this.props.sceneNavigator.viroAppProps.refreshReq);        
 
     let props = this.props.sceneNavigator.viroAppProps;
     let background = null;
@@ -76,12 +72,12 @@ export default class Avatar3DScene extends Component {
         <ViroAmbientLight influenceBitMask={4} color={this.state.bodyColor.body} intensity={global.ambIntensity} />
         <ViroAmbientLight influenceBitMask={8} color={this.state.bodyColor.shoes} intensity={global.ambIntensity} />
 
-        <ViroNode position={props.avatarPos || [0, 0, 0]} rotation={[0, rotation, 0]}>
-                <Character index={0} refresh={this.refreshReq}/>
+            <ViroNode position={props.avatarPos || [0, 0, 0]} rotation={[0, rotation, 0]}>
+                <CharacterHome index={0} refreshReq={this.state.refreshReq} />
         </ViroNode>
       </ViroScene>
     );
   }
 }
 
-module.exports = Avatar3DScene;
+module.exports = AvatarHome3DScene;

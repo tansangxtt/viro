@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, PanResponder, View } from 'react-native';
 import { Viro3DSceneNavigator } from 'react-viro';
 
-var Avatar3DScene = require('./Avatar3DScene');
+var AvatarHome3DScene = require('./AvatarHome3DScene');
 
-export class Avatar extends Component {
+export class AvatarHome extends Component {
 
     constructor(props) {
         super(props);
@@ -21,8 +21,12 @@ export class Avatar extends Component {
 
                 },
             }),
-
-
+            viroProps: {
+                backgroundImage: this.props.backgroundImage,
+                camPos: this.props.camPos,
+                refreshReq: this.props.refreshReq,
+                rotationY: 0,
+            }
         };
         //this.state.rotationY = 0;
         //this.state.panResponder = PanResponder.create({
@@ -38,27 +42,42 @@ export class Avatar extends Component {
         //});
     }
 
+    componentDidMount() {
+        console.log("LOG__" + "AvatarHome Did mount");
+    }
+
+    componentWillUnmount() {
+        console.log("LOG__" + "AvatarHome will unmount");
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        if (nextProps.refreshReq != this.props.refreshReq) {
+            console.log("LOG__" + "AvatarHome WillReceiveProps");
+            this.setState({
+                viroProps: {
+                    backgroundImage: this.props.backgroundImage,
+                    camPos: this.props.camPos,
+                    refreshReq: !this.props.refreshReq,
+                }
+            });
+        }
+
+    }   
+
     render() {
         let props = this.props;
-        props.rotationY = this.state.rotationY;
-        /*
-         *             <Viro3DSceneNavigator style={styles.viro} apiKey="2AE4B758-D40B-4EE5-858A-54C8CE1CED20" viroAppProps={props} initialScene={{ scene: Avatar3DScene }} />
-            <View style={styles.container} >
-
-                <View style={styles.overlay} {...this.state.panResponder.panHandlers} />
-            </View>
-         */
-        //console.warn("avatar");
+        props.rotationY = this.state.rotationY;        
         return (           
             <View style={styles.container} >
-                <Viro3DSceneNavigator style={styles.viro} apiKey="2AE4B758-D40B-4EE5-858A-54C8CE1CED20" viroAppProps={props} initialScene={{ scene: Avatar3DScene }} />
+                <Viro3DSceneNavigator style={styles.viro} apiKey="2AE4B758-D40B-4EE5-858A-54C8CE1CED20" viroAppProps={this.state.viroProps} initialScene={{ scene: AvatarHome3DScene }} />
                 <View style={styles.overlay} {...this.state.panResponder.panHandlers} />
             </View>
         );
     }
 }
 
-export default Avatar;
+export default AvatarHome;
 
 
 const styles = StyleSheet.create({

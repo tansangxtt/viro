@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import AvatarButton from './AvatarButton.js';
-import NavButton from './NavButton.js';
 
+import AvatarButton from './AvatarButton.js'
+import NavButton from './NavButton.js'
+import { withNavigation, StackActions, NavigationActions } from 'react-navigation';
 
 export class NavBar extends Component {
 
     componentDidMount() {
+
     }
 
     render() {
@@ -15,11 +16,22 @@ export class NavBar extends Component {
     return (
       <View style={styles.navBar} pointerEvents='box-none'>
         <View style={styles.buttonContainer}>
-                <AvatarButton press={() => navigate('photo')} source={require("../../res/ui/home/button_photo.png")} />
+                <AvatarButton press={() => {
+                    //const resetAction = StackActions.reset({
+                    //    index: 0,
+                    //    actions: [NavigationActions.navigate({ routeName: 'home' })],
+                    //});
+                    //this.props.navigation.dispatch(resetAction);
+                    //this.props.navigation.dispatch(StackActions.popToTop());
+                    //this.props.navigation.reset([NavigationActions.navigate({ routeName: 'login' })], 0)
+                    //this.props.navigation.replace('home');    
+                    this.props.refreshCallback();
+                    //this.props.navigation.reset([NavigationActions.navigate({ routeName: 'login' }, 0), NavigationActions.navigate({ routeName: 'earnCoins' }, 1)]);
+                }} source={require("../../res/ui/home/button_feed.png")} />
         </View>
         <View style={styles.container}>
           <NavButton text="HOME" active={true} icon={require("../../res/ui/home/tabbar_home.png")} />
-                <NavButton text="EARN COINS" press={() => navigate('profile')} locked={true} icon={require("../../res/ui/home/tabbar_earn.png")} />
+                <NavButton text="EARN COINS" press={() => navigate('profile')} icon={require("../../res/ui/home/tabbar_earn.png")} />
                 <NavButton text="MINI GAMES" press={() => navigate('profile')} locked={true} icon={require("../../res/ui/home/tabbar_minigames.png")} />
                 <NavButton text="PROFILE" press={() => navigate('profile')} icon={require("../../res/ui/home/tabbar_profile.png")} />
         </View>
